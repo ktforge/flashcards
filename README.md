@@ -2,7 +2,7 @@
 
 A flashcard quiz app I built for Codecademy's Full-Stack Engineer path. You make topics, build quizzes for those topics, and fill each quiz with cards you can flip to check your answers.
 
-Live site: (coming soon)
+Live site: https://flashcards-devante.netlify.app/
 
 ## What it does
 
