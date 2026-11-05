@@ -10,7 +10,7 @@ export default function NewQuizForm() {
   const [cards, setCards] = useState([]);
   const [topicId, setTopicId] = useState("");
   const navigate = useNavigate();
-  const topics = {};  // Replace with topics 
+  const topics = {}; // Replace with topics
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -26,9 +26,9 @@ export default function NewQuizForm() {
 
     const quizId = uuidv4();
 
-    // dispatch add quiz action 
+    // dispatch add quiz action
 
-    navigate(ROUTES.quizzesRoute())
+    navigate(ROUTES.quizzesRoute());
   };
 
   const addCardInputs = (e) => {

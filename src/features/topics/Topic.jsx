@@ -5,15 +5,15 @@ import ROUTES from "../../app/routes";
 // import selectors
 
 export default function Topic() {
-  const topics = {};  // replace with selector
+  const topics = {}; // replace with selector
   const quizzes = {}; // replace with selector
   const { topicId } = useParams();
   const topic = topics[topicId];
 
-  if(!topic) {
-    return <Navigate to={ROUTES.topicsRoute()} replace/>
+  if (!topic) {
+    return <Navigate to={ROUTES.topicsRoute()} replace />;
   }
-  
+
   const quizzesForTopic = topic.quizIds.map((quizId) => quizzes[quizId]);
 
   return (
