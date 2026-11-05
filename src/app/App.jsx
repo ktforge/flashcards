@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import NewQuizForm from "../components/NewQuizForm";
 import NewTopicForm from "../components/NewTopicForm";
 import Topics from "../features/topics/Topics";
@@ -14,6 +14,8 @@ export default function App() {
       <Routes>
         {/* every page renders inside AppLayout so the nav bar stays put */}
         <Route path="/" element={<AppLayout />}>
+          {/* the home page has nothing of its own, so send it to topics */}
+          <Route index element={<Navigate to="topics" replace />} />
           <Route path="topics" element={<Topics />} />
           <Route path="topics/new" element={<NewTopicForm />} />
           <Route path="topics/:topicId" element={<Topic />} />
