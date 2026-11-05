@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
 // import selectors
-import { selectTopics } from "../features/topics/topicsSlice";
+import { selectTopics, addQuizId } from "../features/topics/topicsSlice";
 import { addQuiz } from "../features/quizzes/quizzesSlice";
 import { addCard } from "../features/cards/cardsSlice";
 
@@ -18,7 +18,8 @@ export default function NewQuizForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name.length === 0) {
+    // need a title and a topic, or the topic link below would fail
+    if (name.length === 0 || topicId === "") {
       return;
     }
 
@@ -38,9 +39,15 @@ export default function NewQuizForm() {
 
     // dispatch add quiz action
     // cardIds now holds the id of every card made in the loop above
-    dispatch(
-      addQuiz({ id: quizId, name: name, topicId: topicId, cardIds: cardIds }),
-    );
+    const newQuiz = {
+      id: quizId,
+      name: name,
+      topicId: topicId,
+      cardIds: cardIds,
+    };
+    dispatch(addQuiz(newQuiz));
+    // add this quiz's id to its topic so the topic page can list it
+    dispatch(addQuizId(newQuiz));
 
     navigate(ROUTES.quizzesRoute());
   };

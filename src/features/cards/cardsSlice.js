@@ -19,6 +19,9 @@ export const cardsSlice = createSlice({
   },
 });
 
+// every card in the store, keyed by id
+export const selectCards = (state) => state.cards.cards;
+
 // takes an id and gives back a selector for just that card
 export const selectCardById = (id) => (state) => state.cards.cards[id];
 

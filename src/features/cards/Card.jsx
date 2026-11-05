@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 // import selector
-import { selectCardById } from "./cardsSlice";
+import { selectCards } from "./cardsSlice";
 
 export default function Card({ id }) {
-  // just the one card this component was given an id for
-  const card = useSelector(selectCardById(id));
+  // all cards in the store, then pick out the one this component was given
+  const cards = useSelector(selectCards);
+  const card = cards[id];
   const [flipped, setFlipped] = useState(false);
 
   return (
