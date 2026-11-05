@@ -2,10 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ROUTES from "../../app/routes";
-// import quiz selector
-import { selectQuizzes } from './quizzesSlice';
+import { selectQuizzes } from "./quizzesSlice";
 
 export default function Quizzes() {
+  // every quiz in the store, keyed by id
   const quizzes = useSelector(selectQuizzes);
   return (
     <section className="center">

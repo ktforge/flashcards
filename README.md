@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# Flashcards
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A flashcard quiz app I built for Codecademy's Full-Stack Engineer path. You make topics, build quizzes for those topics, and fill each quiz with cards you can flip to check your answers.
 
-## Available Scripts
+Live site: (coming soon)
 
-In the project directory, you can run:
+## What it does
 
-### `npm start`
+You start on the Topics page and create a topic with a name and an icon. Then you build a quiz: give it a title, pick its topic, and add as many front/back cards as you want. Each topic shows how many quizzes it has, and opening a topic lists them. Opening a quiz shows its cards, and clicking a card flips it from the question to the answer.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The form won't save a quiz until it has a title and a topic.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Everything lives in the Redux store in memory, so a refresh starts you fresh.
 
-### `npm test`
+## How it works
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+There are three slices: topics, quizzes, and cards. Each one stores its items in an object keyed by id, and they link to each other by id instead of copying data:
 
-### `npm run build`
+```
+topic  { id, name, icon, quizIds: [...] }
+quiz   { id, name, topicId, cardIds: [...] }
+card   { id, front, back }
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+When you submit a new quiz, the form saves each card with `addCard`, saves the quiz with `addQuiz`, and then adds the quiz's id to its topic with `addQuizId`. Ids come from `uuidv4()`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## What I learned
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The starter came as a Create React App project, so I moved it to Vite first. The build failed right away because the forms import `uuid`, but it was never listed in package.json, so I added it.
 
-### `npm run eject`
+Most of my bugs were typos in names. I saved the cards slice as `cardSlice.js` while everything imported `cardsSlice`, I typed `selectCarById` in the Card component, and I exported `adQuizId` with one d. Each one either broke the build or gave me a blank white page. The browser console named the missing variable every time, so now I check there first.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+At one point clicking a quiz did nothing. The Quiz page still had its placeholder `quizzes = {}`, so it couldn't find the quiz and redirected me straight back to the list. Swapping in the selector fixed it.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+My topics kept showing "0 Quizzes" even after I made a quiz for them. Saving the quiz wasn't enough: I also had to dispatch `addQuizId` so the topic knew about it. That's also why the form now requires a topic, since there's nothing to link the quiz to without one.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Run it
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+npm install
+npm run dev
+```
 
-## Learn More
+Then open the link Vite prints, usually http://localhost:5173.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Example: create a "Math" topic, then a quiz called "Addition" with the cards 2+2 / 4 and 3+3 / 6. The Topics page shows
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+Math
+1 Quizzes
+```
 
-### Code Splitting
+and on the quiz page, clicking the 2+2 card flips it to 4.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Built with React, Redux Toolkit, React Redux, React Router, and Vite.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Built by DeVante Bush

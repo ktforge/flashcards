@@ -1,3 +1,4 @@
+// every url in one place so links and routes stay in sync
 const ROUTES = {
   newQuizRoute: () => "/quizzes/new",
   quizRoute: (id) => `/quizzes/${id}`,

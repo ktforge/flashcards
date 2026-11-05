@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Link, useParams, Navigate } from "react-router-dom";
 import Card from "../cards/Card";
 import ROUTES from "../../app/routes";
-// import quiz selector
 import { selectQuizzes } from "./quizzesSlice";
 
 export default function Quiz() {

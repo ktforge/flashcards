@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams, Navigate } from "react-router-dom";
 import ROUTES from "../../app/routes";
-// import selectors
 import { selectTopics } from "./topicsSlice";
 import { selectQuizzes } from "../quizzes/quizzesSlice";
 
@@ -18,6 +17,7 @@ export default function Topic() {
     return <Navigate to={ROUTES.topicsRoute()} replace />;
   }
 
+  // turn the topic's list of ids into the actual quiz objects
   const quizzesForTopic = topic.quizIds.map((quizId) => quizzes[quizId]);
 
   return (

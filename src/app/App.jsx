@@ -12,6 +12,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* every page renders inside AppLayout so the nav bar stays put */}
         <Route path="/" element={<AppLayout />}>
           <Route path="topics" element={<Topics />} />
           <Route path="topics/new" element={<NewTopicForm />} />

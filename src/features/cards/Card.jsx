@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-// import selector
 import { selectCards } from "./cardsSlice";
 
 export default function Card({ id }) {
@@ -12,6 +11,7 @@ export default function Card({ id }) {
   return (
     <li>
       <button className="card" onClick={(e) => setFlipped(!flipped)}>
+        {/* each click flips between the front and back text */}
         {flipped ? card.back : card.front}
       </button>
     </li>

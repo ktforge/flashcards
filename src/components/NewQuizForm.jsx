@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
-// import selectors
 import { selectTopics, addQuizId } from "../features/topics/topicsSlice";
 import { addQuiz } from "../features/quizzes/quizzesSlice";
 import { addCard } from "../features/cards/cardsSlice";
@@ -25,7 +24,6 @@ export default function NewQuizForm() {
 
     const cardIds = [];
 
-    // create the new cards here and add each card's id to cardIds
     // save each card to the store and keep its id so the quiz can list it
     cards.forEach((card) => {
       const cardId = uuidv4();
@@ -33,11 +31,8 @@ export default function NewQuizForm() {
       dispatch(addCard({ id: cardId, front: card.front, back: card.back }));
     });
 
-    // create the new quiz here
-
     const quizId = uuidv4();
 
-    // dispatch add quiz action
     // cardIds now holds the id of every card made in the loop above
     const newQuiz = {
       id: quizId,

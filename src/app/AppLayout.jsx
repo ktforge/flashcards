@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import ROUTES from "./routes";
 
+// nav bar that stays on every page
 export default function AppLayout() {
   return (
     <div>
@@ -18,6 +19,7 @@ export default function AppLayout() {
           </li>
         </ul>
       </nav>
+      {/* whichever page matches the url shows up here */}
       <Outlet />
     </div>
   );
